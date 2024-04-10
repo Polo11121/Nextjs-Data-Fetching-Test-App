@@ -13,7 +13,7 @@ export const generateMetadata = async ({
   params: { userId },
 }: UserPageProps) => {
   const user = await getUser(userId);
-  const posts = await getUserPosts(userId);
+  const data = await getUserPosts(userId);
 
   if (!user) {
     return {
@@ -23,15 +23,15 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: `${user.name} (${user.email}) - ${posts?.length || 0} posts`,
+    title: `${user.name} (${user.email}) - ${data?.posts?.length || 0} posts`,
     description: "Brett Westwood - Software Engineer",
   };
 };
 
 export const generateStaticParams = async () => {
-  const users = await getUsers();
+  const data = await getUsers();
 
-  return users?.map(({ id }) => ({
+  return data?.users?.map(({ id }) => ({
     userId: id.toString(),
   }));
 };

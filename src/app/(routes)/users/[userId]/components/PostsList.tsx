@@ -1,14 +1,14 @@
 import { Post } from "@/types";
 
 type PostsListProps = {
-  postsPromise: Promise<Post[] | undefined>;
+  postsPromise: Promise<{ posts: Post[] } | undefined>;
 };
 
 export const PostsList = async ({ postsPromise }: PostsListProps) => {
-  const posts = await postsPromise;
+  const data = await postsPromise;
 
-  return posts ? (
-    posts?.map(({ id, title, body }) => (
+  return data ? (
+    data?.posts?.map(({ id, title, body }) => (
       <div key={id}>
         <h2>{title}</h2>
         <p>{body}</p>

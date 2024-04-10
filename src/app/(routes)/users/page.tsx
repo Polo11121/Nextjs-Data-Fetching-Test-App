@@ -3,27 +3,27 @@ import { getUsers } from "@/api";
 import Link from "next/link";
 
 export const generateMetadata = async () => {
-  const users = await getUsers();
+  const data = await getUsers();
 
-  if (!users)
+  if (!data)
     return {
       title: "Users not found",
       description: "Brett Westwood - Software Engineer",
     };
 
   return {
-    title: `${users.length} - Users found`,
+    title: `${data.users.length} - Users found`,
     description: "Brett Westwood - Software Engineer",
   };
 };
 
 const UsersPage = async () => {
-  const users = await getUsers();
+  const data = await getUsers();
 
-  return users ? (
+  return data ? (
     <div className="text-center mt-20">
       <h1 className="text-5xl font-bold">Users Page</h1>
-      {users.map(({ id, name, email }) => (
+      {data.users.map(({ id, name, email }) => (
         <Link href={`/users/${id}`} key={id}>
           <p>{name}</p>
           <p>{email}</p>

@@ -3,7 +3,7 @@ import { env } from "@/lib";
 
 export const getUserPosts = async (
   userId: string
-): Promise<Post[] | undefined> => {
+): Promise<{ posts: Post[] } | undefined> => {
   const response = await fetch(`${env.API_URL}/posts?userId=${userId}`, {
     next: {
       revalidate: 60,
