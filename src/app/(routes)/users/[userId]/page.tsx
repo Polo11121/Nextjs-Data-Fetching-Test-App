@@ -31,9 +31,11 @@ export const generateMetadata = async ({
 export const generateStaticParams = async () => {
   const data = await getUsers();
 
-  return data?.users?.map(({ id }) => ({
-    userId: id.toString(),
-  }));
+  return data?.users
+    ? data?.users?.map(({ id }) => ({
+        userId: id.toString(),
+      }))
+    : [];
 };
 
 const UserPage = async ({ params: { userId } }: UserPageProps) => {
